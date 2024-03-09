@@ -1,0 +1,7 @@
+name: "Label new pull request"
+description: "Add a label to new raised Pull Request"
+author: "Prateek-Wayne"
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
