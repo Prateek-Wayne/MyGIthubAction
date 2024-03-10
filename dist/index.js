@@ -34,14 +34,28 @@ const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const date = new Date();
 core.debug(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
-const run = () => {
+const run = async () => {
+    var _a;
     core.notice(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
     const token = core.getInput("gh-token");
     const label = core.getInput('label');
-    const ocktokit = github.getOctokit(token);
+    const octokit = github.getOctokit(token);
     const context = github.context;
-    console.log(`Inside the main function ${token}`);
-    console.log(JSON.stringify(context));
+    const pullRequest = context.payload.pull_request;
+    try {
+        if (!pullRequest) {
+            throw new Error('this action can only be run on a PR.');
+        }
+        await octokit.rest.issues.addLabels({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: pullRequest.number,
+            labels: [label],
+        });
+    }
+    catch (error) {
+        core.setFailed((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
+    }
 };
 run();
 
