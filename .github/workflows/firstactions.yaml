@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./
-        with:
-          gh-token: ${{ secrets.GITHUB_TOKEN }}
-          label: 'needs-review'
+        # with:
+        #   gh-token: ${{ secrets.GITHUB_TOKEN }}
+        #   label: 'needs-review'
