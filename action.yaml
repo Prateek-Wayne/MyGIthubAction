@@ -2,6 +2,14 @@ name: "Label new pull request"
 description: "Add a label to new raised Pull Request"
 author: "Prateek-Wayne"
 
+inputs:
+  gh-token:
+    description: 'the github token for authentication'
+    required: true
+  label:
+    description: 'the label to apply on PR'
+    required: true
+
 runs:
   using: "node16"
   main: "dist/index.js"

@@ -4,13 +4,20 @@
   "description": "playing with custome github action",
   "main": "index.js",
   "scripts": {
-    "build":"tsc",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
   }
 }
