@@ -1,17 +1,20 @@
-name: Changelog
-'on':
-  pull_request: null
+on:
+  pull_request:
   push:
     branches:
       - main
+
 jobs:
   php-cs-fixer:
     runs-on: ubuntu-latest
+
     permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
       contents: write
+
     uses: srepollock/changelog-generator-action@master
     with:
-      REPO_NAME: srepollock/changelog-generator-action
-      ACCESS_TOKEN: '${{secrets.GITHUB_TOKEN}}'
-      PATH: /CHANGELOG.md
-      COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
+        REPO_NAME: 'srepollock/changelog-generator-action'
+        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        PATH: '/CHANGELOG.md'
+        COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
