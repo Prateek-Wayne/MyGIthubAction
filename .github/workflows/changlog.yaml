@@ -1,25 +1,27 @@
-name: "ChangeLogs"
+name: Changelog
 
 on:
   pull_request:
-    types: [opened, reopened]
-  workflow_dispatch:  
-   
+  push:
+    branches:
+      - main
+
 jobs:
-  generate:
-      name: Changelog Generator
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-          with:
-              # Needs the entire history of the project to generate. The script handles everything else.
-              fetch-depth: 0
-        - name: Create changelog
-          # Action location goes here. It's in root for this workflow. It may be different for your repo.
-          uses: srepollock/changelog-generator-action@master
-          with:
-            REPO_NAME: 'srepollock/changelog-generator-action'
-            ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-            PATH: '/CHANGELOG.md'
-            COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
-    
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Run php-cs-fixer
+      uses: docker://oskarstark/php-cs-fixer-ga
+
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Apply php-cs-fixer changes
