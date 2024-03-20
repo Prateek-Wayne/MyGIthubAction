@@ -13,4 +13,3 @@ jobs:
       - uses: ./
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
-          label: 'needs-review'
