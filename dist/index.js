@@ -47,7 +47,7 @@ const run = async () => {
             owner, repo, issue_number: number
         });
         core.debug(`Main content success : ${issue}`);
-        console.log(`Main Content is this:${issue}`);
+        console.log(`Main Content is this:${JSON.stringify(issue)}`);
     }
     catch (error) {
         core.setFailed((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : "Unknown error");
