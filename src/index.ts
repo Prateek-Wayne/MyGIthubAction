@@ -9,7 +9,7 @@ const run=async()=>{
 
     // const { owner, repo, number } = github.context.issue;
     // core.debug(`Owner is:${owner} | Repo: ${repo} | number : ${number}`);
-    core.debug(`Owner is:${github.context}`);
+    // core.debug(`Owner is:${github.context}`);
     try {
         // const issue=await octokit.rest.issues.get({
         //     owner,repo,issue_number:number
