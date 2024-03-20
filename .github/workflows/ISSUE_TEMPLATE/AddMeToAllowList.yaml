@@ -1,0 +1,50 @@
+name: Add you configuration to yaml file
+description: Update configuration
+title: "[Config Update]: "
+labels: ["config", "update"]
+body:
+  - type: input
+    id: config_name
+    attributes:
+      label: Configuration Name
+      description: Enter the name of the configuration (e.g., "artifactory-ehv").
+    validations:
+      required: true
+  - type: textarea
+    id: destination_cidrs
+    attributes:
+      label: Destination CIDRs
+      description: Enter the destination CIDRs as a comma-separated list (e.g., "130.139.138.30/32").
+    validations:
+      required: true
+  - type: input
+    id: destination_from_port
+    attributes:
+      label: Destination From Port
+      description: Enter the destination from port (e.g., "443").
+    validations:
+      required: true
+  - type: input
+    id: destination_to_port
+    attributes:
+      label: Destination To Port
+      description: Enter the destination to port (e.g., "443").
+    validations:
+      required: true
+  - type: input
+    id: protocols
+    attributes:
+      label: Protocols
+      description: Enter the protocols as a comma-separated list (e.g., "6").
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      description: Select the connection type.
+      options:
+        - direct
+        - firewall
+    validations:
+      required: true

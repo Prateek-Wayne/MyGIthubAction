@@ -1,0 +1,36 @@
+{
+    "artifactory-ehv": {
+      "destination_cidrs": ["130.139.138.30/32"],
+      "ports": [
+        {
+          "destination_from_port": "443",
+          "destination_to_port": "443"
+        }
+      ],
+      "protocols": [6],
+      "connection": "direct"
+    },
+    "artifactory-pic": {
+      "destination_cidrs": ["161.85.28.82/32"],
+      "ports": [
+        {
+          "destination_from_port": "443",
+          "destination_to_port": "443"
+        }
+      ],
+      "protocols": [6],
+      "connection": "direct"
+    },
+    "blackduck": {
+      "destination_cidrs": ["161.92.84.250/32"],
+      "ports": [
+        {
+          "destination_from_port": "443",
+          "destination_to_port": "443"
+        }
+      ],
+      "protocols": [6],
+      "connection": "firewall"
+    }
+  }
+  
