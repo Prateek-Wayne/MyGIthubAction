@@ -4,6 +4,7 @@ import * as github from '@actions/github';
 const date=new Date();
 core.debug(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
 const run=async()=>{
+    core.debug(` AGAIN Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
     const token = core.getInput('gh-token');
     const octokit = github.getOctokit(token);
 
@@ -15,6 +16,7 @@ const run=async()=>{
             owner,repo,issue_number:number
         });
         core.debug(`Main content success : ${issue}`);
+        console.log(`Main Content is this:${issue}`);
     } catch (error) {
         core.setFailed((error as Error)?.message ?? "Unknown error")
     }
