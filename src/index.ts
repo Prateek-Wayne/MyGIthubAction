@@ -1,13 +1,23 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
-} catch (error) {
-    core.setFailed((error as Error)?.message ?? "Unknown error")
+const date=new Date();
+core.debug(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
+const run=async()=>{
+    const token = core.getInput('gh-token');
+    const octokit = github.getOctokit(token);
+
+    const { owner, repo, number } = github.context.issue;
+    core.debug(`Owner is:${owner} | Repo: ${repo} | number : ${number}`);
+    // core.debug(`Owner is:${github.context}`);
+    try {
+        const issue=await octokit.rest.issues.get({
+            owner,repo,issue_number:number
+        });
+        core.debug(`Main content success : ${issue}`);
+    } catch (error) {
+        core.setFailed((error as Error)?.message ?? "Unknown error")
+    }
 }
+
+run();
