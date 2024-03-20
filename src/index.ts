@@ -4,7 +4,7 @@ import * as github from '@actions/github';
 const date=new Date();
 core.debug(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
 const run=async()=>{
-    core.notice(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
+    core.notice(`Main Code Starte 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
     const token=core.getInput( "gh-token");
     const octokit=github.getOctokit(token);
     const context=github.context;
