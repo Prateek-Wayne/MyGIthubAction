@@ -6,21 +6,17 @@ core.debug(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${d
 const run=async()=>{
     core.notice(`Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `);
     const token=core.getInput( "gh-token");
-    const label=core.getInput('label');
     const octokit=github.getOctokit(token);
     const context=github.context;
-    const pullRequest = context.payload.pull_request;
+    const { owner, repo, number } = github.context.issue;
     try {
-        if(!pullRequest)
-        {
-            throw new Error('this action can only be run on a PR.')
-        }
-        await octokit.rest.issues.addLabels({
-            owner:context.repo.owner,
-            repo:context.repo.repo,
-            issue_number:pullRequest.number,
-            labels:[label],
-        })
+        const issue = await octokit.rest.issues.get({
+            owner,
+            repo,
+            issue_number: number
+          });
+          const issueBody = issue.data.body;
+          console.log(`Inside the issueBody :${issueBody}`);
     } catch (error) {
         core.setFailed((error as Error)?.message ?? "Unknown error")
     }
