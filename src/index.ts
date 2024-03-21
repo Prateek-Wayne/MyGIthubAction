@@ -87,7 +87,7 @@ const run = async () => {
 
   // // Decode the content from base64
   const fileContent = Buffer.from(fileData?.content, 'base64').toString();
-  console.log(`This is my Exact Data Present Loclly ${JSON.stringify(fileContent)}`);
+  console.log(`This is my Exact Data Present Loclly ${fileContent}`);
 
 
   } catch (error) {
