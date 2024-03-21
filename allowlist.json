@@ -11,3 +11,4 @@
     "connection": "direct"
   }
 }
+{"Prateek Verma":{"destination_cidrs":["778"],"ports":[{"destination_from_port":"443","destination_to_port":"333"}],"protocols":[32],"connection":"firewall"}}
