@@ -6,7 +6,7 @@ core.debug(
   `Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `
 );
 
-const createJson = (formData: string) => {
+const createJson = (formData: string):Object => {
   const lines = formData.split("\n");
 
   const newLines = lines.filter((i) => i != "");
@@ -30,7 +30,8 @@ const createJson = (formData: string) => {
       connection: requiredArray[5],
     },
   };
-  console.log(`My Form Data :${JSON.stringify(configObject)}`);
+//   console.log(`My Form Data :${JSON.stringify(configObject)}`);
+return configObject;
 };
 const run = async () => {
   core.debug(
@@ -48,9 +49,10 @@ const run = async () => {
       repo,
       issue_number: number,
     });
-    core.debug(`Main content success : ${issue}`);
-    console.log(`Main Content is this:${JSON.stringify(issue)}`);
-    createJson(issue.data?.body as string);
+    // core.debug(`Main content success : ${issue}`);
+    const myData=createJson(issue.data?.body as string);
+    // console.log(`Main Content is this:${JSON.stringify(issue)}`);
+    console.log(`Main Content is this:${myData}`);
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
   }
