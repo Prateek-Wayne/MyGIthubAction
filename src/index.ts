@@ -53,7 +53,7 @@ const run = async () => {
     // core.debug(`Main content success : ${issue}`);
     const myData=createJson(issue.data?.body as string);
     // console.log(`Main Content is this:${JSON.stringify(issue)}`);
-    console.log(`COntent is this:${myData}`);
+    console.log(`COntent is this:${JSON.stringify(myData)}`);
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
   }
