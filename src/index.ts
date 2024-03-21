@@ -60,7 +60,7 @@ const run = async () => {
    const fileDataResponse = await octokit.rest.repos.getContent({
     owner,
     repo,
-    path: 'allo-list.json', // Path to the existing file
+    path: 'allowlist.json', // Path to the existing file
   });
 
   const fileData = fileDataResponse.data as FileData;
