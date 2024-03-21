@@ -33,6 +33,7 @@ const createJson = (formData: string):Object => {
 //   console.log(`My Form Data :${JSON.stringify(configObject)}`);
 return configObject;
 };
+
 const run = async () => {
   core.debug(
     ` AGAIN Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `
@@ -52,7 +53,7 @@ const run = async () => {
     // core.debug(`Main content success : ${issue}`);
     const myData=createJson(issue.data?.body as string);
     // console.log(`Main Content is this:${JSON.stringify(issue)}`);
-    console.log(`Main Content is this:${myData}`);
+    console.log(`COntent is this:${myData}`);
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
   }
