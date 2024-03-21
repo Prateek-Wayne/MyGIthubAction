@@ -1,14 +1,16 @@
-name: "New Issue"
+name: "Hello"
 
 on:
-  issues:
+  pull_request:
     types: [opened, reopened]
+  workflow_dispatch:  
    
 jobs:
-  newIssue:
+  hello:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: ./
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
+          label: 'needs-review'
