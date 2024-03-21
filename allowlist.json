@@ -1,14 +1,13 @@
 {
-    "artifactory-ehv": {
-      "destination_cidrs": ["130.139.138.30/32"],
-      "ports": [
-        {
-          "destination_from_port": "443",
-          "destination_to_port": "443"
-        }
-      ],
-      "protocols": [6],
-      "connection": "direct"
-    }
+  "artifactory-ehv": {
+    "destination_cidrs": ["130.139.138.30/32"],
+    "ports": [
+      {
+        "destination_from_port": "443",
+        "destination_to_port": "443"
+      }
+    ],
+    "protocols": [6],
+    "connection": "direct"
   }
-  {"artifactory-ehv12":{"destination_cidrs":["130.139.138.30/3"],"ports":[{"destination_from_port":"563","destination_to_port":"334"}],"protocols":[8],"connection":"firewall"}}
+}

@@ -17,8 +17,6 @@ interface FileData {
   _links: any; // You can specify the structure of _links if needed
 }
 
-
-
 const date = new Date();
 core.debug(
   `Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `
@@ -71,38 +69,76 @@ const run = async () => {
     const myData = createJson(issue.data?.body as string);
     console.log(`COntent is this:${JSON.stringify(myData)}`);
 
-   // Fetch the content of the existing file
-   const fileDataResponse = await octokit.rest.repos.getContent({
-    owner,
-    repo,
-    path: 'allowlist.json', // Path to the existing file
-  });
+    // Fetch the content of the existing file
+    const fileDataResponse = await octokit.rest.repos.getContent({
+      owner,
+      repo,
+      path: "allowlist.json", // Path to the existing file
+    });
 
-  const fileData = fileDataResponse.data as FileData;
-  console.log(`THis is the content of file data: ${JSON.stringify(fileData)}`);
-  if(fileData.type)
-  if (fileData.type !== 'file' || !fileData?.content) {
-    throw new Error('The specified path does not point to a file or the file is empty');
-  }
+    const fileData = fileDataResponse.data as FileData;
+    console.log(
+      `THis is the content of file data: ${JSON.stringify(fileData)}`
+    );
+    if (fileData.type)
+      if (fileData.type !== "file" || !fileData?.content) {
+        throw new Error(
+          "The specified path does not point to a file or the file is empty"
+        );
+      }
 
-  // // Decode the content from base64
-  const fileContent = Buffer.from(fileData?.content, 'base64').toString();
-  console.log(`This is my Exact Data Present Loclly ${fileContent}`);
+    // // Decode the content from base64
+    const fileContent = Buffer.from(fileData?.content, "base64").toString();
+    console.log(`This is my Exact Data Present Loclly ${fileContent}`);
 
-  // new content:
-  const newContent = fileContent + JSON.stringify(myData);
-  
-  // Update the file with the new content
-  await octokit.rest.repos.createOrUpdateFileContents({
-    owner,
-    repo,
-    path: 'allowlist.json', // Path to the existing file
-    message: 'Append form data', // Commit message
-    content: Buffer.from(newContent).toString('base64'), // Encode the new content to base64
-    sha: fileData.sha, // The blob SHA of the file being replaced
-  });
+    // new content:
+    const newContent = fileContent + JSON.stringify(myData);
 
+    // Create a new branch
+    const branchName = `append-form-data-${Date.now()}`;
+    const { data: refData } = await octokit.rest.git.getRef({
+      owner,
+      repo,
+      ref: "heads/main", // Replace 'main' with the name of your default branch if it's different
+    });
+    await octokit.rest.git.createRef({
+      owner,
+      repo,
+      ref: `refs/heads/${branchName}`,
+      sha: refData.object.sha,
+    });
 
+    //  Update the file with the new content
+    await octokit.rest.repos.createOrUpdateFileContents({
+      owner,
+      repo,
+      path: "allowlist.json", // Path to the existing file
+      message: "Append form data", // Commit message
+      content: Buffer.from(newContent).toString("base64"), // Encode the new content to base64
+      sha: fileData.sha, // The blob SHA of the file being replaced
+      branch: branchName,
+    });
+
+    // Create a pull request
+    console.log(`Creating Branch Intitiated`);
+    await octokit.rest.pulls.create({
+      owner,
+      repo,
+      title: "Append form data",
+      head: branchName,
+      base: "main", // Replace 'main' with the name of your default branch if it's different
+    });
+    
+    console.log(`Creating Branch Success`);
+    // Update the file with the new content
+    // await octokit.rest.repos.createOrUpdateFileContents({
+    //   owner,
+    //   repo,
+    //   path: 'allowlist.json', // Path to the existing file
+    //   message: 'Append form data', // Commit message
+    //   content: Buffer.from(newContent).toString('base64'), // Encode the new content to base64
+    //   sha: fileData.sha, // The blob SHA of the file being replaced
+    // });
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
   }
