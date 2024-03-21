@@ -1,12 +1,15 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
+import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
+
+type FileData = RestEndpointMethodTypes["repos"]["getContent"]["response"]["data"];
 
 const date = new Date();
 core.debug(
   `Main Code Started 🚀 at ${date.getDate()}: ${date.getHours()}: ${date.getMinutes()} `
 );
 
-const createJson = (formData: string):Object => {
+const createJson = (formData: string): Object => {
   const lines = formData.split("\n");
 
   const newLines = lines.filter((i) => i != "");
@@ -30,8 +33,8 @@ const createJson = (formData: string):Object => {
       connection: requiredArray[5],
     },
   };
-//   console.log(`My Form Data :${JSON.stringify(configObject)}`);
-return configObject;
+  //   console.log(`My Form Data :${JSON.stringify(configObject)}`);
+  return configObject;
 };
 
 const run = async () => {
@@ -50,10 +53,28 @@ const run = async () => {
       repo,
       issue_number: number,
     });
-    // core.debug(`Main content success : ${issue}`);
-    const myData=createJson(issue.data?.body as string);
-    // console.log(`Main Content is this:${JSON.stringify(issue)}`);
+    const myData = createJson(issue.data?.body as string);
     console.log(`COntent is this:${JSON.stringify(myData)}`);
+
+   // Fetch the content of the existing file
+   const fileDataResponse = await octokit.rest.repos.getContent({
+    owner,
+    repo,
+    path: 'allo-list.json', // Path to the existing file
+  });
+
+  const fileData = fileDataResponse.data as FileData;
+  console.log(`THis is the content of file data: ${JSON.stringify(fileData)}`);
+  // if (fileData.type !== 'file' || !fileData?.content) {
+  //   throw new Error('The specified path does not point to a file or the file is empty');
+  // }
+
+  // // Decode the content from base64
+  // const fileContent = Buffer.from(fileData.content, 'base64').toString();
+
+
+
+
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
   }
