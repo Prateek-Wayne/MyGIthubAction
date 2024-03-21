@@ -2,7 +2,22 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 
-type FileData = RestEndpointMethodTypes["repos"]["getContent"]["response"]["data"];
+// type FileData = RestEndpointMethodTypes["repos"]["getContent"]["response"]["data"];
+interface FileData {
+  type: "file" | "symlink" | "submodule" | "dir";
+  size: number;
+  name: string;
+  path: string;
+  content: string;
+  sha: string;
+  url: string;
+  git_url: string | null;
+  html_url: string | null;
+  download_url: string | null;
+  _links: any; // You can specify the structure of _links if needed
+}
+
+
 
 const date = new Date();
 core.debug(
@@ -65,14 +80,14 @@ const run = async () => {
 
   const fileData = fileDataResponse.data as FileData;
   console.log(`THis is the content of file data: ${JSON.stringify(fileData)}`);
-  // if (fileData.type !== 'file' || !fileData?.content) {
-  //   throw new Error('The specified path does not point to a file or the file is empty');
-  // }
+  if(fileData.type)
+  if (fileData.type !== 'file' || !fileData?.content) {
+    throw new Error('The specified path does not point to a file or the file is empty');
+  }
 
   // // Decode the content from base64
-  // const fileContent = Buffer.from(fileData.content, 'base64').toString();
-
-
+  const fileContent = Buffer.from(fileData?.content, 'base64').toString();
+  console.log(`This is my Exact Data Present Loclly ${JSON.stringify(fileContent)}`);
 
 
   } catch (error) {
