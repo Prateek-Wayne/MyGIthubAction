@@ -89,6 +89,19 @@ const run = async () => {
   const fileContent = Buffer.from(fileData?.content, 'base64').toString();
   console.log(`This is my Exact Data Present Loclly ${fileContent}`);
 
+  // new content:
+  const newContent = fileContent + JSON.stringify(myData);
+  
+  // Update the file with the new content
+  await octokit.rest.repos.createOrUpdateFileContents({
+    owner,
+    repo,
+    path: 'allowlist.json', // Path to the existing file
+    message: 'Append form data', // Commit message
+    content: Buffer.from(newContent).toString('base64'), // Encode the new content to base64
+    sha: fileData.sha, // The blob SHA of the file being replaced
+  });
+
 
   } catch (error) {
     core.setFailed((error as Error)?.message ?? "Unknown error");
