@@ -1,4 +1,4 @@
-name: "Hello"
+name: "Issue Opened"
 
 on:
   pull_request:
