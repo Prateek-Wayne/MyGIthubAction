@@ -28,7 +28,7 @@ body:
   - type: input
     id: bu_name
     attributes:
-      label: Business Unit Name
+      label: Buissiness Unit Name
       description: Name of the owning business or `Global` if a global service
     validations:
       required: true
@@ -37,8 +37,6 @@ body:
     attributes:
       label: DNS
       description: DNS 
-    validations:
-      required: true
   - type: textarea
     id: destination_cidrs
     attributes:
@@ -85,6 +83,3 @@ body:
       options:
         - code1
         - other
-    validations:
-      required: true
-
