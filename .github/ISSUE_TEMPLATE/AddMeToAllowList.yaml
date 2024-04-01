@@ -83,3 +83,5 @@ body:
       options:
         - code1
         - other
+    validations:
+      required: true
