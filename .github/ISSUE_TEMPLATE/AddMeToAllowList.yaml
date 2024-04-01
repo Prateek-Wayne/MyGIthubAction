@@ -95,16 +95,6 @@ body:
         - no
     validations:
       required: true
-  - type: dropdown
-    id: tls
-    attributes:
-      label: TLS
-      description: Select if TLS is used
-      options:
-        - yes
-        - no
-    validations:
-      required: true
   - type: input
     id: landing_pages
     attributes:
