@@ -85,15 +85,15 @@ body:
         - other
     validations:
       required: true
-- type: checkboxes
-  id: use_ephimerals_ports
-  attributes:
-    label: Use Ephimerals Ports
-    description: The Code of Conduct helps create a safe space for everyone. We require
-      that everyone agrees to it.
-    options:
-      - label: I agree to follow this project's [Code of Conduct](link/to/coc)
-        required: true
+  - type: checkboxes
+    id: use_ephimerals_ports
+    attributes:
+      label: Use Ephimerals Ports
+      description: The Code of Conduct helps create a safe space for everyone. We require
+        that everyone agrees to it.
+      options:
+        - label: I agree to follow this project's [Code of Conduct](link/to/coc)
+          required: true
   - type: input
     id: landing_pages
     attributes:
