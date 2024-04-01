@@ -87,10 +87,4 @@ body:
         - other
     validations:
       required: true
-  - type: input
-    id: landing_pages
-    attributes:
-      label: Landing Page(s)
-      description: Enter the landing page(s) (e.g., "https://tools-server.htce.nl.philips.com/cicd_dashboard/").
-    validations:
-      required: true
+
