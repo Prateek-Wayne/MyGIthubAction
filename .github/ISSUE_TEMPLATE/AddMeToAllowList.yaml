@@ -93,6 +93,14 @@ body:
       options:
         - label: Use of Ephimerals Ports
           required: true
+  - type: checkboxes
+    id: tls
+    attributes:
+      label: TLS
+      description: Select if TLS ise used
+      options:
+        - label: Use of TLS
+          required: true
   - type: input
     id: landing_pages
     attributes:
