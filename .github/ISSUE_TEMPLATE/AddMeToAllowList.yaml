@@ -92,7 +92,7 @@ body:
       description: Enter the landing page(s) (e.g., "https://tools-server.htce.nl.philips.com/cicd_dashboard/").
     validations:
       required: true
- - type: dropdown
+  - type: dropdown
     id: use_ephemeral_ports
     attributes:
       label: Use Ephemeral Ports
