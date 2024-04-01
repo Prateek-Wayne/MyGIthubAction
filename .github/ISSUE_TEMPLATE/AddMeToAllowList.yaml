@@ -28,7 +28,7 @@ body:
   - type: input
     id: bu_name
     attributes:
-      label: Business Unit Name
+      label: Buissiness Unit Name
       description: Name of the owning business or `Global` if a global service
     validations:
       required: true
@@ -37,8 +37,6 @@ body:
     attributes:
       label: DNS
       description: DNS 
-    validations:
-      required: true
   - type: textarea
     id: destination_cidrs
     attributes:
@@ -85,32 +83,3 @@ body:
       options:
         - code1
         - other
-    validations:
-      required: true
-  - type: input
-    id: landing_pages
-    attributes:
-      label: Landing Page(s)
-      description: Enter the landing page(s) (e.g., "https://tools-server.htce.nl.philips.com/cicd_dashboard/").
-    validations:
-      required: true
-  - type: dropdown
-    id: use_ephemeral_ports
-    attributes:
-      label: Use Ephemeral Ports
-      description: Select if ephemeral ports are used.
-      options:
-        - yes
-        - no
-    validations:
-      required: true
-  - type: dropdown
-    id: tls
-    attributes:
-      label: TLS
-      description: Select if TLS is used.
-      options:
-        - yes
-        - no
-    validations:
-      required: true
