@@ -91,8 +91,18 @@ body:
       label: Use Ephimerals Ports
       description: Select the authentication type.
       options:
-        - code1
-        - other
+        - yes
+        - no
+    validations:
+      required: true
+  - type: dropdown
+    id: tls
+    attributes:
+      label: TLS
+      description: Select if TLS is used
+      options:
+        - yes
+        - no
     validations:
       required: true
   - type: input
