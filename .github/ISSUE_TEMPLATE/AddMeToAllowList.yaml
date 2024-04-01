@@ -88,11 +88,10 @@ body:
   - type: checkboxes
     id: use_ephimerals_ports
     attributes:
-      label: Use Ephimerals Ports
-      description: The Code of Conduct helps create a safe space for everyone. We require
-        that everyone agrees to it.
+      label: Ephimerals Ports
+      description: Select if Ephimeral Ports are used.
       options:
-        - label: I agree to follow this project's [Code of Conduct](link/to/coc)
+        - label: Use of Ephimerals Ports
           required: true
   - type: input
     id: landing_pages
