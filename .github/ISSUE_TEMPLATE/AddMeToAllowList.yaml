@@ -85,6 +85,16 @@ body:
         - other
     validations:
       required: true
+  - type: dropdown
+    id: use_ephimerals_ports
+    attributes:
+      label: Use Ephimerals Ports
+      description: Select the authentication type.
+      options:
+        - code1
+        - other
+    validations:
+      required: true
   - type: input
     id: landing_pages
     attributes:
