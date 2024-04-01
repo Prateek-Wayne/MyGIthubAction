@@ -1,20 +1,49 @@
-name: Add you configuration to yaml file
-description: Update configuration
-title: "[Config Update]: "
-labels: ["config", "update"]
+name: Add you configuration for new PGN connection 🚀 🖥️
+description: Update configuration yaml file 
+title: "Issue: Request PGN connection"
+labels: ["demo"]
+
 body:
   - type: input
-    id: config_name
+    id: service_name
     attributes:
-      label: Configuration Name
-      description: Enter the name of the configuration (e.g., "artifactory-ehv").
+      label: Service Name
+      description: Enter the name of the service (e.g., "artifactory-ehv").
+    validations:
+      required: true
+  - type: textarea
+    id: service_description
+    attributes:
+      label: Service Description
+      description: Enter description of the service.
+    validations:
+      required: true
+  - type: textarea
+    id: owner_name
+    attributes:
+      label: Owner
+      description: Enter the contact address of owner(s)
+    validations:
+      required: true
+  - type: input
+    id: bu_name
+    attributes:
+      label: Business Unit Name
+      description: Name of the owning business or `Global` if a global service
+    validations:
+      required: true
+  - type: input
+    id: dns_name
+    attributes:
+      label: DNS
+      description: DNS 
     validations:
       required: true
   - type: textarea
     id: destination_cidrs
     attributes:
       label: Destination CIDRs
-      description: Enter the destination CIDRs as a comma-separated list (e.g., "130.139.138.30/32").
+      description: Enter the destination CIDRs as a comma-separated list (e.g., "192.0.2.0, 198.51.100.0").
     validations:
       required: true
   - type: input
@@ -46,5 +75,42 @@ body:
       options:
         - direct
         - firewall
+    validations:
+      required: true
+  - type: dropdown
+    id: authentication
+    attributes:
+      label: Authentication
+      description: Select the authentication type.
+      options:
+        - code1
+        - other
+    validations:
+      required: true
+  - type: input
+    id: landing_pages
+    attributes:
+      label: Landing Page(s)
+      description: Enter the landing page(s) (e.g., "https://tools-server.htce.nl.philips.com/cicd_dashboard/").
+    validations:
+      required: true
+  - type: dropdown
+    id: use_ephemeral_ports
+    attributes:
+      label: Use Ephemeral Ports
+      description: Select if ephemeral ports are used.
+      options:
+        - yes
+        - no
+    validations:
+      required: true
+  - type: dropdown
+    id: tls
+    attributes:
+      label: TLS
+      description: Select if TLS is used.
+      options:
+        - yes
+        - no
     validations:
       required: true
